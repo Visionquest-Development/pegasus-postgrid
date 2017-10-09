@@ -336,4 +336,4 @@ Domain Path: /languages
 	}
 	add_shortcode("loop-grid", "loop_grid_query_shortcode");
 	
-	
+?>
