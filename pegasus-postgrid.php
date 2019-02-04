@@ -20,7 +20,7 @@ Domain Path: /languages
 	}
 
 	function pegasus_post_grid_menu_item() {
-		add_menu_page("Posts Grid", "Posts Grid", "manage_options", "pegasus_posts_plugin_options", "pegasus_posts_plugin_settings_page", null, 99);
+		//add_menu_page("Posts Grid", "Posts Grid", "manage_options", "pegasus_posts_plugin_options", "pegasus_posts_plugin_settings_page", null, 99);
 	}
 	add_action("admin_menu", "pegasus_post_grid_menu_item");
 	
@@ -79,8 +79,16 @@ Domain Path: /languages
 		), $atts));
 
 		// de-funkify query
-		$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
-		$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+		//$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
+		//$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+
+		$the_query = preg_replace_callback('~&#x0*([0-9a-f]+);~', function($matches){
+			return chr( dechex( $matches[1] ) );
+		}, $the_query);
+
+		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
+			return chr( $matches[1] );
+		}, $the_query);
 
 		// query is made               
 		query_posts($the_query);
@@ -93,6 +101,8 @@ Domain Path: /languages
 		$temp_pic = '';
 		$temp_content = '';
 		$the_id = '';
+
+		global $post;
 
 		// the loop
 		if (have_posts()) : while (have_posts()) : the_post();
@@ -167,8 +177,16 @@ Domain Path: /languages
 		), $atts));
 
 		// de-funkify query
-		$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
-		$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+		//$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
+		//$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+
+		$the_query = preg_replace_callback('~&#x0*([0-9a-f]+);~', function($matches){
+			return chr( dechex( $matches[1] ) );
+		}, $the_query);
+
+		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
+			return chr( $matches[1] );
+		}, $the_query);
 
 		// query is made               
 		query_posts($the_query);
@@ -181,6 +199,8 @@ Domain Path: /languages
 		$temp_pic = '';
 		$temp_content = '';
 		$the_id = '';
+
+		global $post;
 
 		// the loop
 		if (have_posts()) : while (have_posts()) : the_post();
@@ -261,8 +281,16 @@ Domain Path: /languages
 		), $atts));
 
 		// de-funkify query
-		$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
-		$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+		//$the_query = preg_replace('~&#x0*([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $the_query);
+		//$the_query = preg_replace('~&#0*([0-9]+);~e', 'chr(\\1)', $the_query);
+
+		$the_query = preg_replace_callback('~&#x0*([0-9a-f]+);~', function($matches){
+			return chr( dechex( $matches[1] ) );
+		}, $the_query);
+
+		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
+			return chr( $matches[1] );
+		}, $the_query);
 
 		// query is made               
 		query_posts($the_query);
@@ -275,6 +303,8 @@ Domain Path: /languages
 		$temp_pic = '';
 		$temp_content = '';
 		$the_id = '';
+
+		global $post;
 
 		// the loop
 		if (have_posts()) : while (have_posts()) : the_post();
