@@ -45,8 +45,8 @@ Domain Path: /languages
 	}
 	
 	function pegasus_posts_plugin_styles() {
-		
-		wp_enqueue_style( 'post-grid-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/postgrid.css', array(), null, 'all' );
+
+		wp_register_style( 'post-grid-css', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/postgrid.css', array(), null, 'all' );
 		
 	}
 	add_action( 'wp_enqueue_scripts', 'pegasus_posts_plugin_styles' );
@@ -55,9 +55,9 @@ Domain Path: /languages
 	* Proper way to enqueue JS 
 	*/
 	function pegasus_posts_grid_plugin_js() {
-		
-		wp_enqueue_script( 'match-height-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/matchHeight.js', array( 'jquery' ), null, true );
-		wp_enqueue_script( 'pegasus-posts-plugin-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/plugin.js', array( 'jquery' ), null, true );
+
+		wp_register_script( 'match-height-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/matchHeight.js', array( 'jquery' ), null, 'all' );
+		wp_register_script( 'pegasus-posts-plugin-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/plugin.js', array( 'jquery' ), null, 'all' );
 		
 	} //end function
 	add_action( 'wp_enqueue_scripts', 'pegasus_posts_grid_plugin_js' );
@@ -156,6 +156,11 @@ Domain Path: /languages
 		endif;
 
 		wp_reset_query();
+
+		wp_enqueue_style( 'post-grid-css' );
+		wp_enqueue_script( 'match-height-js' );
+		wp_enqueue_script( 'pegasus-posts-plugin-js' );
+
 		return '<ul class="post-listing">' . $output . '</ul>';
 	   
 	}
@@ -254,9 +259,13 @@ Domain Path: /languages
 		endwhile; else:
 			$output .= "nothing found.";
 		endif;
-		
-		
+
 		wp_reset_query();
+
+		wp_enqueue_style( 'post-grid-css' );
+		wp_enqueue_script( 'match-height-js' );
+		wp_enqueue_script( 'pegasus-posts-plugin-js' );
+
 		return '<ul class="post-listing">' . $output . '</ul>';
 		
 	}
@@ -359,8 +368,12 @@ Domain Path: /languages
 			$output .= "nothing found.";
 		endif;
 		
-		
 		wp_reset_query();
+
+		wp_enqueue_style( 'post-grid-css' );
+		wp_enqueue_script( 'match-height-js' );
+		wp_enqueue_script( 'pegasus-posts-plugin-js' );
+
 		return '<ul class="post-grid clearfix">' . $output . '</ul>';
 	   
 	}
