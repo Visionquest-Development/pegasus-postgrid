@@ -1,50 +1,104 @@
- 
- 
+
+
 	/*======================
 		POST LOOP CSS
 	======================*/
- 
-	
-	
+
+  .post-listing *, ::after, ::before {
+    box-sizing: border-box;
+  }
+
 	/* Loop shortcode css */
-	.post-listing { margin: 10px auto !important; padding: 0 !important; list-style-type: none; }
-	.post-listing li { 
+	.post-listing {
+    margin: 10px auto !important;
+    padding: 0 !important;
+    list-style-type: none;
+    position: relative;
+  }
+	.post-listing li {
 		padding: 20px;
 		border-radius: 15px;
-		margin-bottom: 10px; 
+		margin-bottom: 10px;
 	}
-	
+
 	.post-listing li h2 { margin-top: 0; }
-	
+
 	.post-listing li .post-img-feat { margin-bottom: 20px; }
-	
-	.post-listing li .blog-container { margin: 0 !important; padding: 0 !important; list-style-type: none; }
-	
-	.post-listing li .blog-container li { display: inline-block; width: 50%; float: left; }
-	
+
+	.post-listing li .blog-container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+	.post-listing li .blog-container li {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .post-listing img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
 	/* Grid loop */
-	.post-grid { margin: 10px auto !important; padding: 0 !important; list-style-type: none; }
-	.post-grid li { width: 33%; display: inline-block; float: left; padding: 20px; border-radius: 7px; margin-bottom: 1px; border-right: 1px solid white;  }
-	
-	
-	.post-listing li .blog-container { margin: 0 !important; padding: 0 !important; list-style-type: none; }
-	
+	.post-grid {
+    margin: 10px auto;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    flex-direction: row;
+  }
+	.post-grid li {
+    /* width: 33%;
+    display: inline-block; */
+    flex: 0 0 26%;
+
+    padding: 20px;
+    border-radius: 7px;
+    margin-bottom: 1px;
+    border-right: 1px solid white;
+  }
+
+
+
+
+
+	.post-listing li .blog-container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+
+
+  .post-grid img {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+
+
+
 	@media only screen and ( max-width: 768px ) {
 		.post-listing, .post-grid { padding: 0 20px !important; }
-		
+
 		.post-listing li .blog-container li { width: 100%; float: none; }
-		
+
 		.no-img-container { display: none !important; }
-	
+
 		.post-grid li { width: 50%; }
 	}
-	
+
 	@media only screen and (max-width: 665px) {
-	
+
 	}
-	
+
 	@media only screen and (max-width: 479px) {
 		.post-grid li { width: 100%; display: block; float: none; padding: 20px; border: none;  }
 	}
 
-	
