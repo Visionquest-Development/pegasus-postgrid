@@ -1,0 +1,69 @@
+{
+  "rows": [
+    {
+      "section_name": "Post Grid Settings",
+      "loop": [
+        {
+          "name": "The Query",
+          "attribute": "the_query",
+          "options": "Your WP Query",
+          "description": "The query for posts.'",
+          "example": "the_query=\"post_type=logo_slider&order_by=title&order=ASC\""
+        },
+        {
+          "name": "Background Color",
+          "attribute": "bkg_color",
+          "options": "true, false",
+          "description": "Display the caption?",
+          "example": "display_caption=\"true\""
+        }
+      ],
+      "loop-posts": [
+        {
+          "name": "The Query",
+          "attribute": "the_query",
+          "options": "Your WP Query",
+          "description": "The query for posts.'",
+          "example": "the_query=\"post_type=testimonial_slider&order_by=title&order=ASC\""
+        },
+        {
+          "name": "Background Color",
+          "attribute": "bkg_color",
+          "options": "true, false",
+          "description": "Display the caption?",
+          "example": "display_caption=\"true\""
+        },
+        {
+          "name": "Pagination",
+          "attribute": "pagination",
+          "options": "true, false",
+          "description": "Display pagination?",
+          "example": "pagination=\"true\""
+        }
+      ],
+      "loop-grid": [
+        {
+          "name": "The Query",
+          "attribute": "the_query",
+          "options": "Your WP Query",
+          "description": "The query for posts.'",
+          "example": "the_query=\"post_type=testimonial_slider&order_by=title&order=ASC\""
+        },
+        {
+          "name": "Background Color",
+          "attribute": "bkg_color",
+          "options": "true, false",
+          "description": "Display the caption?",
+          "example": "display_caption=\"true\""
+        },
+        {
+          "name": "Pagination",
+          "attribute": "pagination",
+          "options": "true, false",
+          "description": "Display pagination?",
+          "example": "pagination=\"true\""
+        }
+      ]
+    }
+  ]
+}

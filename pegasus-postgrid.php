@@ -19,6 +19,66 @@ Domain Path: /languages
 		exit;
 	}
 
+	function pegasus_postgrid_admin_table_css() {
+		if ( postgrid_check_main_theme_name() == 'Pegasus' || postgrid_check_main_theme_name() == 'Pegasus Child' ) {
+			//do nothing
+		} else {
+			//wp_register_style('postgrid-admin-table-css', trailingslashit(plugin_dir_url(__FILE__)) . 'css/pegasus-postgrid-admin-table.css', array(), null, 'all');
+			ob_start();
+			?>
+				pre {
+					background-color: #f9f9f9;
+					border: 1px solid #aaa;
+					page-break-inside: avoid;
+					font-family: monospace;
+					font-size: 15px;
+					line-height: 1.6;
+					margin-bottom: 1.6em;
+					max-width: 100%;
+					overflow: auto;
+					padding: 1em 1.5em;
+					display: block;
+					word-wrap: break-word;
+				}
+				input[type="text"].code {
+					width: 100%;
+				}
+				table.pegasus-table {
+					width: 100%;
+					border-collapse: collapse;
+					border-color: #777 !important;
+				}
+				table.pegasus-table th {
+					background-color: #f1f1f1;
+					text-align: left;
+				}
+				table.pegasus-table th,
+				table.pegasus-table td {
+					border: 1px solid #ddd;
+					padding: 8px;
+				}
+				table.pegasus-table tr:nth-child(even) {
+					background-color: #f2f2f2;
+				}
+				table.pegasus-table thead tr { background-color: #282828; }
+				table.pegasus-table thead tr td { padding: 10px; }
+				table.pegasus-table thead tr td strong { color: white; }
+				table.pegasus-table tbody tr:nth-child(0) { background-color: #cccccc; }
+				table.pegasus-table tbody tr td { padding: 10px; }
+				table.pegasus-table code { color: #d63384; }
+
+			<?php
+			// Get the buffered content
+			$inline_css = ob_get_clean();
+
+			wp_register_style('postgrid-admin-table-css', false);
+			wp_enqueue_style('postgrid-admin-table-css');
+
+			wp_add_inline_style('postgrid-admin-table-css', $inline_css);
+		}
+	}
+
+	add_action('admin_enqueue_scripts', 'pegasus_postgrid_admin_table_css');
 
 	function postgrid_check_main_theme_name() {
 		$current_theme_slug = get_option('stylesheet'); // Slug of the current theme (child theme if used)
@@ -60,26 +120,7 @@ Domain Path: /languages
 
 			<div>
 				<h3>Loop Usage 1:</h3>
-				<style>
-					pre {
-						background-color: #f9f9f9;
-						border: 1px solid #aaa;
-						page-break-inside: avoid;
-						font-family: monospace;
-						font-size: 15px;
-						line-height: 1.6;
-						margin-bottom: 1.6em;
-						max-width: 100%;
-						overflow: auto;
-						padding: 1em 1.5em;
-						display: block;
-						word-wrap: break-word;
-					}
 
-					input[type="text"].code {
-						width: 100%;
-					}
-				</style>
 				<pre >[loop the_query="post_type=post&showposts=100" bkg_color="#dedede" ]</pre>
 
 				<input
@@ -94,26 +135,7 @@ Domain Path: /languages
 
 			<div>
 				<h3>Loop Posts Usage 1:</h3>
-				<style>
-					pre {
-						background-color: #f9f9f9;
-						border: 1px solid #aaa;
-						page-break-inside: avoid;
-						font-family: monospace;
-						font-size: 15px;
-						line-height: 1.6;
-						margin-bottom: 1.6em;
-						max-width: 100%;
-						overflow: auto;
-						padding: 1em 1.5em;
-						display: block;
-						word-wrap: break-word;
-					}
 
-					input[type="text"].code {
-						width: 100%;
-					}
-				</style>
 				<pre >[loop-posts the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede"]</pre>
 
 				<input
@@ -128,26 +150,7 @@ Domain Path: /languages
 
 			<div>
 				<h3>Loop Grid Usage 1:</h3>
-				<style>
-					pre {
-						background-color: #f9f9f9;
-						border: 1px solid #aaa;
-						page-break-inside: avoid;
-						font-family: monospace;
-						font-size: 15px;
-						line-height: 1.6;
-						margin-bottom: 1.6em;
-						max-width: 100%;
-						overflow: auto;
-						padding: 1em 1.5em;
-						display: block;
-						word-wrap: break-word;
-					}
 
-					input[type="text"].code {
-						width: 100%;
-					}
-				</style>
 				<pre >[loop-grid the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede" pagination="yes"]</pre>
 
 				<input
@@ -162,14 +165,68 @@ Domain Path: /languages
 
 			<p style="color:red;">MAKE SURE YOU DO NOT HAVE ANY RETURNS OR <?php echo htmlspecialchars('<br>'); ?>'s IN YOUR SHORTCODES, OTHERWISE IT WILL NOT WORK CORRECTLY</p>
 
+			<div>
+				<?php echo pegasus_postgrid_settings_table(); ?>
+			</div>
 		</div>
 	<?php
 	}
 
-	//function pegasus_post_grid_menu_item() {
-		//add_menu_page("Posts Grid", "Posts Grid", "manage_options", "pegasus_posts_plugin_options", "pegasus_posts_plugin_settings_page", null, 99);
-	//}
-	//add_action("admin_menu", "pegasus_post_grid_menu_item");
+	function pegasus_postgrid_settings_table() {
+
+		$data = json_decode( file_get_contents( plugin_dir_path( __FILE__ ) . 'settings.json' ), true );
+
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			return '<p style="color: red;">Error: Invalid JSON provided.</p>';
+		}
+
+		// Start building the HTML
+		$html = '<table border="0" cellpadding="1" class="table pegasus-table" align="left">
+		<thead>
+		<tr style="background-color: #282828;">
+		<td <span><strong>Name</strong></span></td>
+		<td <span><strong>Attribute</strong></span></td>
+		<td <span><strong>Options</strong></span></td>
+		<td <span><strong>Description</strong></span></td>
+		<td <span><strong>Example</strong></span></td>
+		</tr>
+		</thead>
+		<tbody>';
+
+		// Iterate over the data to populate rows
+		if (!empty($data['rows'])) {
+			foreach ($data['rows'] as $section) {
+				foreach ($section as $key => $settings) {
+					if ($key !== 'section_name') {
+						// Add group header
+						$html .= '<tr>';
+						$html .= '<td colspan="5">';
+						$html .= '<span>';
+						$html .= '<strong>' . htmlspecialchars(ucwords(str_replace('_', ' ', $key))) . '</strong>';
+						$html .= '</span>';
+						$html .= '</td>';
+						$html .= '</tr>';
+
+						// Add rows in the group
+						foreach ($settings as $row) {
+							$html .= '<tr>
+								<td>' . htmlspecialchars($row['name']) . '</td>
+								<td>' . htmlspecialchars($row['attribute']) . '</td>
+								<td>' . nl2br(htmlspecialchars($row['options'])) . '</td>
+								<td>' . nl2br(htmlspecialchars($row['description'])) . '</td>
+								<td><code>' . htmlspecialchars($row['example']) . '</code></td>
+							</tr>';
+						}
+					}
+				} //end foreach
+			}
+		}
+
+		$html .= '</tbody></table>';
+
+		// Return the generated HTML
+		return $html;
+	}
 
 	/*
 	function pegasus_posts_plugin_settings_page() { ?>
