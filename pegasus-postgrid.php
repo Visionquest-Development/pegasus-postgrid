@@ -121,12 +121,12 @@ Domain Path: /languages
 			<div>
 				<h3>Loop Usage 1:</h3>
 
-				<pre >[loop the_query="post_type=post&showposts=100" bkg_color="#dedede" ]</pre>
+				<pre >[loop the_query="post_type=post&showposts=10&order=ASC&order_by=date" bkg_color="#dedede" ]</pre>
 
 				<input
 					type="text"
 					readonly
-					value="<?php echo esc_html('[loop the_query="post_type=post&showposts=100" bkg_color="#dedede" ]'); ?>"
+					value="<?php echo esc_html('[loop the_query="post_type=post&showposts=10&order=ASC&order_by=date" bkg_color="#dedede" ]'); ?>"
 					class="regular-text code"
 					id="my-shortcode"
 					onClick="this.select();"
@@ -136,12 +136,12 @@ Domain Path: /languages
 			<div>
 				<h3>Loop Posts Usage 1:</h3>
 
-				<pre >[loop-posts the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede"]</pre>
+				<pre >[loop-posts the_query="post_type=post&showposts=100&order=ASC&order_by=date" bkg_color="#dedede"]</pre>
 
 				<input
 					type="text"
 					readonly
-					value="<?php echo esc_html('[loop-posts the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede"]'); ?>"
+					value="<?php echo esc_html('[loop-posts the_query="post_type=post&showposts=100&order=ASC&order_by=date" bkg_color="#dedede"]'); ?>"
 					class="regular-text code"
 					id="my-shortcode"
 					onClick="this.select();"
@@ -151,12 +151,12 @@ Domain Path: /languages
 			<div>
 				<h3>Loop Grid Usage 1:</h3>
 
-				<pre >[loop-grid the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede" pagination="yes"]</pre>
+				<pre >[loop-grid the_query="post_type=post&showposts=100&order=ASC&order_by=date" bkg_color="#dedede" pagination="yes"]</pre>
 
 				<input
 					type="text"
 					readonly
-					value="<?php echo esc_html('[loop-grid the_query="post_type=post&showposts=100&ord=ASC&order_by=date" bkg_color="#dedede" pagination="yes"]'); ?>"
+					value="<?php echo esc_html('[loop-grid the_query="post_type=post&showposts=100&order=ASC&order_by=date" bkg_color="#dedede" pagination="yes"]'); ?>"
 					class="regular-text code"
 					id="my-shortcode"
 					onClick="this.select();"
@@ -294,6 +294,7 @@ Domain Path: /languages
 			return chr( $matches[1] );
 		}, $the_query);
 
+		$the_query = str_replace('&amp;', '&', $the_query);
 
 		$query_args = array(
 			'post_type' => 'post', // Ensure you are querying the correct post type
@@ -366,6 +367,7 @@ Domain Path: /languages
 							$output .= "</a>";
 						}
 
+						$output .= '<div class="content-container">';
 						$output .= "<a href='$temp_link'><h2>$temp_title</h2></a>";
 						$output .= "<i>$temp_date</i>";
 						$output .= "<br>";
@@ -386,6 +388,7 @@ Domain Path: /languages
 						$output .= "</p>";
 
 						$output .= "<a class='read-more-link ' href='$temp_link'>Read More</a>";
+						$output .= "</div>";
 
 					$output .= "</div>";
 				$output .= "</li>";
@@ -433,6 +436,8 @@ Domain Path: /languages
 		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
 			return chr( $matches[1] );
 		}, $the_query);
+
+		$the_query = str_replace('&amp;', '&', $the_query);
 
 		$query_args = array(
 			'post_type' => 'post', // Ensure you are querying the correct post type
@@ -537,7 +542,7 @@ Domain Path: /languages
 		wp_enqueue_script( 'match-height-js' );
 		wp_enqueue_script( 'pegasus-posts-plugin-js' );
 
-		return '<ul class="post-listing">' . $output . '</ul>';
+		return '<ul class="post-loop-listing">' . $output . '</ul>';
 
 	}
 	add_shortcode("loop-posts", "blog_loop_query_shortcode");
@@ -571,6 +576,8 @@ Domain Path: /languages
 		$the_query = preg_replace_callback('~&#0*([0-9]+);~', function($matches){
 			return chr( $matches[1] );
 		}, $the_query);
+
+		$the_query = str_replace('&amp;', '&', $the_query);
 
 		$query_args = array(
 			'post_type' => 'post', // Ensure you are querying the correct post type

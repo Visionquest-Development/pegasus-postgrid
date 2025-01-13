@@ -7,55 +7,66 @@
   .post-listing *, ::after, ::before {
     box-sizing: border-box;
   }
+  .post-loop-listing *, ::after, ::before {
+    box-sizing: border-box;
+  }
 
 	/* Loop shortcode css */
-	.post-listing {
+	.post-listing, .post-loop-listing {
     margin: 10px auto !important;
     padding: 0 !important;
     list-style-type: none;
     position: relative;
   }
-	.post-listing li {
+	.post-listing li, .post-loop-listing li {
 		padding: 20px;
 		border-radius: 15px;
 		margin-bottom: 10px;
 	}
 
-	.post-listing li h2 { margin-top: 0; }
+	.post-listing li h2, .post-loop-listing li h2 { margin-top: 0; }
 
-	.post-listing li .post-img-feat { margin-bottom: 20px; }
+	.post-listing li .post-img-feat, .post-loop-listing li .post-img-feat { margin-bottom: 20px; }
 
-	.post-listing li .blog-container {
+	.post-listing li .blog-container, .post-loop-listing li .blog-container {
     margin: 0;
     padding: 0;
     list-style-type: none;
   }
 
-	.post-listing li .blog-container li {
+	.post-listing li .blog-container li, .post-loop-listing li .blog-container li {
     display: inline-block;
     width: 50%;
   }
 
-  .post-listing img {
+  .post-listing img, .post-loop-listing img {
     max-width: 100%;
     height: auto;
   }
 
+  .post-loop-listing img {
+    vertical-align: initial;
+  }
+
+  .post-loop-listing .content-container {
+    vertical-align: top;
+  }
 
 	/* Grid loop */
 	.post-grid {
     margin: 10px auto;
-    padding: 0;
     list-style-type: none;
-    display: flex;
+    display: flex
+;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    justify-content: space-between;
+    gap: 10px;
     flex-direction: row;
   }
 	.post-grid li {
     /* width: 33%;
     display: inline-block; */
-    flex: 0 0 26%;
+    flex: 0 0 calc(33% - 10px);
 
     padding: 20px;
     border-radius: 7px;
@@ -88,6 +99,18 @@
 		.post-listing, .post-grid { padding: 0 20px !important; }
 
 		.post-listing li .blog-container li { width: 100%; float: none; }
+		.post-loop-listing li .blog-container li { width: 100%; float: none; }
+
+    .post-loop-listing li .img-container  {
+      padding-bottom: 0;;
+    }
+    .post-loop-listing li .content-container {
+      padding-top: 0;
+    }
+		/* .post-loop-listing li {
+      margin-bottom: 0;
+      padding-bottom: 0;
+     } */
 
 		.no-img-container { display: none !important; }
 
@@ -99,6 +122,12 @@
 	}
 
 	@media only screen and (max-width: 479px) {
-		.post-grid li { width: 100%; display: block; float: none; padding: 20px; border: none;  }
+		.post-grid li {
+      width: 100%;
+      display: block;
+      float: none;
+      padding: 20px;
+      border: none;
+    }
 	}
 

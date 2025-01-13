@@ -7,8 +7,8 @@
           "name": "The Query",
           "attribute": "the_query",
           "options": "Your WP Query",
-          "description": "The query for posts.'",
-          "example": "the_query=\"post_type=logo_slider&order_by=title&order=ASC\""
+          "description": "The query for posts.",
+          "example": "the_query=\"post_type=post&order_by=title&order=ASC\""
         },
         {
           "name": "Background Color",
@@ -23,8 +23,8 @@
           "name": "The Query",
           "attribute": "the_query",
           "options": "Your WP Query",
-          "description": "The query for posts.'",
-          "example": "the_query=\"post_type=testimonial_slider&order_by=title&order=ASC\""
+          "description": "The query for posts.",
+          "example": "the_query=\"post_type=post&order_by=title&order=ASC\""
         },
         {
           "name": "Background Color",
@@ -46,8 +46,8 @@
           "name": "The Query",
           "attribute": "the_query",
           "options": "Your WP Query",
-          "description": "The query for posts.'",
-          "example": "the_query=\"post_type=testimonial_slider&order_by=title&order=ASC\""
+          "description": "The query for posts.",
+          "example": "the_query=\"post_type=post&order_by=title&order=ASC\""
         },
         {
           "name": "Background Color",
