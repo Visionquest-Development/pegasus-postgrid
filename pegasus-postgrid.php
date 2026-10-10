@@ -260,7 +260,7 @@ Domain Path: /languages
 	*/
 	function pegasus_posts_grid_plugin_js() {
 
-		wp_register_script( 'match-height-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/matchHeight.js', array( 'jquery' ), null, 'all' );
+		wp_register_script( 'match-height-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/matchHeight.js', array( 'jquery' ), '0.7.2', true );
 		wp_register_script( 'pegasus-posts-plugin-js', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/plugin.js', array( 'jquery' ), null, 'all' );
 
 	} //end function
